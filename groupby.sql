@@ -1,0 +1,1 @@
+select department, max(salary) as MaxSalary from employee group by department;
