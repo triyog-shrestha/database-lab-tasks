@@ -1,0 +1,17 @@
+The professor and students are 2 entities with a special relationship between each other. They have a 1 to many relationship in which 1 professor guides many students and many students can have the same professor.
+
+
+A book has attributes such as title and book id where the latter is the primary key.
+A chapter has attributes such as title and chapter id where the latter is the primary key.
+The relationship between a book and a chapter is one to many where one book has many chapters and each chapter is associated to a single book.
+
+
+the entities are : 
+Faculty data center : the attributes are faculty, school, email, name and id
+User  : the attributes are id, name, password
+Admin : the attributes are id, username and password
+Teacher : the attributes are id, username and password
+
+many users can inquire a faculty center and one faculty data center can provide data to many users
+one data center can provide services to one admin
+one data center can provide modification multiple teachers
