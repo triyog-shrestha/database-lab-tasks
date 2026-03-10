@@ -1,0 +1,53 @@
+-- Create table
+CREATE TABLE employee (
+    emp_id INT PRIMARY KEY,
+    name VARCHAR2(255) NOT NULL,
+    age INT,
+    salary FLOAT,
+    department VARCHAR2(255),
+    gender CHAR(1),
+    dateOfBirth DATE,
+    joinedDate DATE DEFAULT SYSDATE NOT NULL,
+    managerId VARCHAR2(20) DEFAULT 'main123',
+    designation VARCHAR2(50)
+);
+
+-- Insert data
+INSERT INTO employee (emp_id, name, salary, department, gender, dateOfBirth, managerId, designation)
+VALUES (1, 'Navy Blue', 36720, 'Software engineering', 'f', TO_DATE('2008-06-05','YYYY-MM-DD'), '1', 'Manager');
+INSERT INTO employee (emp_id, name, salary, department, gender, dateOfBirth, managerId, designation)
+VALUES (2, 'Gunna Wunna', 738340, 'Software engineering', 'm', TO_DATE('1998-09-19','YYYY-MM-DD'), '1', 'Engineer');
+INSERT INTO employee (emp_id, name, salary, department, gender, dateOfBirth, managerId, designation)
+VALUES (3, 'John Blue', 90188, 'Business Analytics', 'm', TO_DATE('2002-02-05','YYYY-MM-DD'), '4', 'Engineer');
+INSERT INTO employee (emp_id, name, salary, department, gender, dateOfBirth, managerId, designation)
+VALUES (4, 'Frank Lucas', 738340, 'Business Management', 'm', TO_DATE('1989-01-13','YYYY-MM-DD'), '4', 'Manager');
+
+-- Max salary per department
+SELECT department, MAX(salary) AS MaxSalary FROM employee GROUP BY department;
+
+-- Youngest employee
+SELECT * FROM employee WHERE dateOfBirth = (SELECT MAX(dateOfBirth) FROM employee);
+
+-- Most recently joined employee
+SELECT * FROM employee WHERE joinedDate = (SELECT MAX(joinedDate) FROM employee);
+
+-- Highest salary employee
+SELECT * FROM employee WHERE salary = (SELECT MAX(salary) FROM employee);
+
+-- Oldest employee
+SELECT * FROM employee WHERE dateOfBirth = (SELECT MIN(dateOfBirth) FROM employee);
+
+-- Name, joinedDate, dateOfBirth, current date and age where age > 25
+SELECT 
+    name,
+    joinedDate,
+    dateOfBirth,
+    SYSDATE AS currentDate,
+    FLOOR(MONTHS_BETWEEN(SYSDATE, dateOfBirth) / 12) AS age
+FROM employee
+WHERE FLOOR(MONTHS_BETWEEN(SYSDATE, dateOfBirth) / 12) > 25;
+
+-- Update gender where emp_id = 1 and gender = 'm'
+UPDATE employee
+SET gender = 'f'
+WHERE emp_id = 1 AND gender = 'm';
