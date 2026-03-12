@@ -70,3 +70,5 @@ select * from employee where year(BDATE) between 1960 and 1999;
 
 #q6 employee name with department name
 select e.FNAME, d.DNAME from department D join employee E on E.DNO = D.DNUMBER;
+
+
